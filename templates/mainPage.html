@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Cover Letter Generator</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      padding: 20px;
+      background-color: #f8f8f8;
+    }
+    h1 {
+      color: #333;
+    }
+    form {
+      background-color: #fff;
+      border-radius: 5px;
+      padding: 20px;
+      box-shadow: 0px 0px 10px rgba(0,0,0,0.1);
+    }
+    label {
+      font-weight: bold;
+      display: block;
+      margin-top: 20px;
+    }
+    input, textarea {
+      width: 100%;
+      padding: 10px;
+      border-radius: 5px;
+      border: 1px solid #ddd;
+    }
+    input[type="submit"] {
+      background-color: #4CAF50;
+      border: none;
+      color: white;
+      text-align: center;
+      display: inline-block;
+      margin-top: 20px;
+      cursor: pointer;
+      padding: 15px 32px;
+      text-decoration: none;
+      font-size: 16px;
+    }
+    #coverLetter {
+      margin-top: 30px;
+      background-color: #fff;
+      border-radius: 5px;
+      padding: 20px;
+      box-shadow: 0px 0px 10px rgba(0,0,0,0.1);
+    }
+    .navbar {
+      overflow: hidden;
+      background-color: #333;
+    }
+    .navbar a {
+      float: left;
+      display: block;
+      color: #f2f2f2;
+      text-align: center;
+      padding: 14px 16px;
+      text-decoration: none;
+    }
+    h1 {
+      color: #333;
+    }
+  </style>
+  <script>
+    function validateForm() {
+      var name = document.getElementById('name').value;
+      var jobInfo = document.getElementById('jobInfo').value;
+      if (name == "" || jobInfo == "") {
+        alert("All fields must be filled out");
+        return false;
+      }
+    }
+    function displayUser(user) {
+      var userDisplay = document.getElementById('userDisplay');
+      if (user) {
+        userDisplay.innerHTML = '<a href="/profile">Profile</a>';
+      } else {
+        userDisplay.innerHTML = '<a href="/signin">Sign In</a>';
+      }
+    }
+  </script>
+</head>
+<body>
+  <div class="navbar">
+    <a href="/">Home</a>
+    <div id="userDisplay" style="float: right;"></div>
+  </div>
+<h1>Cover Letter Generator</h1>
+<script>
+  // Simulate user sign in status
+  var user = false; // Change to true when user is signed in
+  displayUser(user);
+</script>
+<form action="/" method="post" enctype="multipart/form-data" onsubmit="return validateForm()">
+  <label for="name">Your Name:</label>
+  <input type="text" id="name" name="name"><br>
+  
+  <label for="resume">Upload your resume:</label>
+  <input type="file" id="resume" name="resume" accept=".pdf, .doc, .docx"><br>
+  
+  <label for="jobInfo">Enter Job Information:</label>
+  <textarea id="jobInfo" name="jobInfo" rows="5" cols="50"></textarea><br>
+
+  <label for="notes">Enter Additional Notes:</label>
+  <textarea id="notes" name="notes" rows="5" cols="50"></textarea><br>
+  
+  <input type="submit" value="Generate Cover Letter">
+</form> 
+
+<div id="coverLetter">
+  <h2>Your Generated Cover Letter:</h2>
+  {% if result %}
+  <h4> {{ result }}</h4>
+  {% endif %}
+  <p id="coverLetterContent"></p>
+</div>
+
+</body>
+</html>
